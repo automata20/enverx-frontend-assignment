@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"paths": {
+			"assets": ["./assets"],
+			"images": ["./assets/img"],
+			"icons": ["./assets/icons"],
+			"components": ["./components"],
+      "context": ["./context"],
+      "hooks": ["./hooks"],
+			"layouts": ["./layouts"],
+			"pages": ["./pages"],
+			"routes": ["./routes"],
+			"services": ["./services"],
+			"store": ["./store"],
+			"utils": ["./utils"],
+      "constants": ["./constants"]
+		}
+	},
+	"exclude": ["node_modules"]
+}
