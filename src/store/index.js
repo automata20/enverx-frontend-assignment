@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import auth from './auth';
+import user from './user';
+import transaction from './transaction';
 
 const reducer = combineReducers({
   // here we will be adding reducers
-  auth
+  user,
+  transaction
 });
 
 const store = configureStore({

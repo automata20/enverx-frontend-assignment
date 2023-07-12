@@ -3,6 +3,7 @@ import Home from 'pages/Home';
 import Login from 'pages/Login';
 import Signup from 'pages/Signup';
 import Dashboard from 'pages/Dashboard';
+// import VisualChart from 'components/VisualChart';
 
 // router configuration for RouterProvider element in react-router
 const RoutesConfig = createBrowserRouter([
@@ -27,6 +28,10 @@ const RoutesConfig = createBrowserRouter([
     path: '/dashboard',
     element: <Dashboard />
   },
+  // {
+  //   path: '/visualize',
+  //   element: <VisualChart />
+  // },
   {
     path: '*',
     element: <>Page Not Found</>
