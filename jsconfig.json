@@ -10,7 +10,7 @@
 			"routes": ["./routes"],
 			"services": ["./services"],
 			"store": ["./store"],
-			"utils": ["./utils"],
+			"utils": ["./utils"]
 		}
 	},
 	"exclude": ["node_modules"]
