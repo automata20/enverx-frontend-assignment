@@ -13,7 +13,9 @@ import {
   CardContent,
   Typography,
   CardActions,
-  InputLabel
+  InputLabel,
+  Select,
+  MenuItem
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 
@@ -32,6 +34,8 @@ function Dashboard() {
   const [expenses, setExpenses] = useState(0);
   const [data, setData] = useState({});
   const [inputValue, setInputValue] = useState('');
+  const [selectedOption, setSelectedOption] = useState('INCOME');
+  const [comment, setComment] = useState('');
 
   const totalBalance = income + expenses;
 
@@ -39,10 +43,12 @@ function Dashboard() {
     setInputValue(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted with value:', inputValue);
+  const handleInput2Change = (e) => {
+    setComment(e.target.value);
+  };
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
   };
 
   const getTransactionsList = () => {
@@ -56,11 +62,11 @@ function Dashboard() {
         filteredData.forEach((i) => {
           console.log(i);
           if (i.type === 'INCOME') {
-            inc += i.amount;
+            inc += parseInt(i.amount, 10);
           }
 
           if (i.type === 'EXPENSE') {
-            e += i.amount;
+            e += parseInt(i.amount, 10);
           }
           setIncome(inc);
           setExpenses(e);
@@ -72,18 +78,10 @@ function Dashboard() {
   };
 
   const onSubmitTransaction = (d) => {
-    const a = {
-      ...d,
-      amount: '1000',
-      category: 'Grociers',
-      created_at: 'this',
-      type: 'EXPENSE',
-      userId: 'auth?.currentUser?.uid'
-    };
-
-    addDoc(transactionsCollectionRef, a)
+    addDoc(transactionsCollectionRef, d)
       .then((res) => {
         console.log(res);
+        getTransactionsList();
       })
       .catch((err) => {
         console.error(err);
@@ -95,6 +93,7 @@ function Dashboard() {
     deleteDoc(transactionDoc)
       .then((res) => {
         console.log(res);
+        getTransactionsList();
       })
       .catch((err) => {
         console.error(err);
@@ -110,6 +109,22 @@ function Dashboard() {
       .catch((err) => {
         console.error(err);
       });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Form submitted with value:', inputValue, selectedOption, comment);
+
+    const a = {
+      amount: parseInt(inputValue, 10),
+      category: comment,
+      created_at: Date.now(),
+      type: selectedOption,
+      userId: user.uid
+    };
+
+    onSubmitTransaction(a);
   };
 
   useEffect(() => {
@@ -181,6 +196,24 @@ function Dashboard() {
                         label="Amount"
                         value={inputValue}
                         onChange={handleInputChange}
+                        variant="outlined"
+                        margin="normal"
+                        size="small"
+                      />
+                      <Select
+                        labelId="select-label"
+                        value={selectedOption}
+                        onChange={handleOptionChange}
+                        label="Select an option"
+                        size="small"
+                      >
+                        <MenuItem value="INCOME">Income</MenuItem>
+                        <MenuItem value="EXPENSE">Expense</MenuItem>
+                      </Select>
+                      <TextField
+                        label="Comment"
+                        value={comment}
+                        onChange={handleInput2Change}
                         variant="outlined"
                         margin="normal"
                         size="small"
