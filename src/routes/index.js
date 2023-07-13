@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Home from 'pages/Home';
+// import Home from 'pages/Home';
 import Login from 'pages/Login';
 import Signup from 'pages/Signup';
 import Dashboard from 'pages/Dashboard';
@@ -9,7 +9,7 @@ import Dashboard from 'pages/Dashboard';
 const RoutesConfig = createBrowserRouter([
   {
     path: '/',
-    element: <Home />
+    element: <Dashboard />
   },
   {
     path: '/auth',
@@ -24,10 +24,10 @@ const RoutesConfig = createBrowserRouter([
       }
     ]
   },
-  {
-    path: '/dashboard',
-    element: <Dashboard />
-  },
+  // {
+  //   path: '/dashboard',
+  //   element: <Dashboard />
+  // },
   // {
   //   path: '/visualize',
   //   element: <VisualChart />
